@@ -198,21 +198,22 @@
                 bmx: 0, cityCycle: 0
             };
 
-            // Q1・Q2で「用途とテンション」のベース得点を決定
-            if (q1 === "A") { scores.bmx += 5; scores.streetMtb += 4; scores.crossBike += 3; scores.cityCycle += 3; scores.dirtJump += 2; scores.gravel += 1; }
-            if (q1 === "B") { scores.fullSus += 5; scores.hardTail += 4; scores.dirtJump += 4; scores.gravel += 3; scores.bmx += 1; }
-            if (q1 === "C") { scores.raceRoad += 5; scores.endurRoad += 4; scores.crossBike += 3; scores.gravel += 2; scores.cityCycle += 1; }
+            // Q1の配点（ベースの場所適性）
+            if (q1 === "A") { scores.bmx += 7; scores.streetMtb += 6; scores.crossBike += 5; scores.dirtJump += 4; scores.cityCycle += 4; }
+            if (q1 === "B") { scores.fullSus += 8; scores.hardTail += 7; scores.dirtJump += 6; scores.gravel += 4; }
+            if (q1 === "C") { scores.raceRoad += 8; scores.endurRoad += 7; scores.crossBike += 5; scores.gravel += 4; }
 
-            if (q2 === "A") { scores.bmx += 6; scores.dirtJump += 5; scores.streetMtb += 4; scores.fullSus += 1; }
-            if (q2 === "B") { scores.fullSus += 6; scores.gravel += 4; scores.endurRoad += 3; scores.cityCycle += 2; scores.streetMtb += 2; scores.hardTail += 1; }
-            if (q2 === "C") { scores.raceRoad += 6; scores.hardTail += 5; scores.crossBike += 4; scores.endurRoad += 4; scores.gravel += 2; }
-            if (q2 === "D") { scores.cityCycle += 8; scores.crossBike += 3; scores.streetMtb += 2; scores.gravel += 1; }
+            // Q2の配点（本人の一番やりたい熱量）
+            if (q2 === "A") { scores.bmx += 10; scores.dirtJump += 9; scores.streetMtb += 7; } // トリック熱を最重視
+            if (q2 === "B") { scores.fullSus += 10; scores.streetMtb += 5; scores.gravel += 4; scores.endurRoad += 3; scores.cityCycle += 3; }
+            if (q2 === "C") { scores.raceRoad += 9; scores.hardTail += 8; scores.crossBike += 7; scores.endurRoad += 5; }
+            if (q2 === "D") { scores.cityCycle += 10; scores.crossBike += 5; }
 
-            // Q3を「ハードウェアの絶対条件（特大加点）」として処理し、矛盾を排除
-            if (q3 === "A") { scores.fullSus += 30; }
-            if (q3 === "D") { scores.hardTail += 30; scores.dirtJump += 30; }
-            if (q3 === "B") { scores.raceRoad += 30; scores.endurRoad += 30; scores.gravel += 30; }
-            if (q3 === "C") { scores.bmx += 30; scores.streetMtb += 30; scores.crossBike += 30; scores.cityCycle += 30; }
+            // Q3の配点（ハンドルだけの決定を廃止。スタイルの方向性を微調整する加点に変更）
+            if (q3 === "A") { scores.fullSus += 7; scores.hardTail -= 5; }
+            if (q3 === "D") { scores.hardTail += 6; scores.dirtJump += 6; scores.fullSus += 2; }
+            if (q3 === "B") { scores.raceRoad += 7; scores.endurRoad += 7; scores.gravel += 6; }
+            if (q3 === "C") { scores.crossBike += 5; scores.bmx += 4; scores.streetMtb += 5; scores.cityCycle += 4; scores.raceRoad -= 2; }
 
             const sortedTypes = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
             const rank1 = sortedTypes[0];
