@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>息子専用！ピッタリ自転車診断</title>
+    <title>由悟専用！ピッタリ自転車診断</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -121,7 +121,7 @@
 </head>
 <body>
 
-    <h1>🚲 息子専用！ピッタリ自転車診断 🚲</h1>
+    <h1>🚲 由悟専用！ピッタリ自転車診断 🚲</h1>
 
     <!-- Q1 -->
     <div id="step1" class="step active">
@@ -150,7 +150,7 @@
         </div>
     </div>
 
-    <!-- Q3（指定の順序に並び替え：A -> D -> B -> C） -->
+    <!-- Q3 -->
     <div id="step3" class="step">
         <h2>Q3: ぶっちゃけ、見た目や機材の「こだわり」はどこ？</h2>
         <div class="radio-group">
@@ -166,7 +166,7 @@
 
     <!-- RESULT -->
     <div id="result-step" class="step">
-        <h2>息子への総合おすすめ提案</h2>
+        <h2>由悟への総合おすすめ提案</h2>
         <div id="result-container"></div>
         <div class="size-box" id="size-advice"></div>
         <div class="btn-container">
@@ -198,20 +198,21 @@
                 bmx: 0, cityCycle: 0
             };
 
-            if (q1 === "A") { scores.bmx += 4; scores.streetMtb += 3; scores.crossBike += 3; scores.cityCycle += 2; }
-            if (q1 === "B") { scores.fullSus += 4; scores.hardTail += 4; scores.dirtJump += 3; scores.gravel += 2; }
-            if (q1 === "C") { scores.raceRoad += 4; scores.endurRoad += 4; scores.gravel += 3; scores.crossBike += 2; }
+            // Q1・Q2で「用途とテンション」のベース得点を決定
+            if (q1 === "A") { scores.bmx += 5; scores.streetMtb += 4; scores.crossBike += 3; scores.cityCycle += 3; scores.dirtJump += 2; scores.gravel += 1; }
+            if (q1 === "B") { scores.fullSus += 5; scores.hardTail += 4; scores.dirtJump += 4; scores.gravel += 3; scores.bmx += 1; }
+            if (q1 === "C") { scores.raceRoad += 5; scores.endurRoad += 4; scores.crossBike += 3; scores.gravel += 2; scores.cityCycle += 1; }
 
-            if (q2 === "A") { scores.bmx += 5; scores.dirtJump += 5; }
-            if (q2 === "B") { scores.fullSus += 6; scores.streetMtb += 2; }
-            if (q2 === "C") { scores.hardTail += 4; scores.raceRoad += 4; scores.endurRoad += 3; scores.crossBike += 3; scores.gravel += 3; }
-            if (q2 === "D") { scores.cityCycle += 8; }
+            if (q2 === "A") { scores.bmx += 6; scores.dirtJump += 5; scores.streetMtb += 4; scores.fullSus += 1; }
+            if (q2 === "B") { scores.fullSus += 6; scores.gravel += 4; scores.endurRoad += 3; scores.cityCycle += 2; scores.streetMtb += 2; scores.hardTail += 1; }
+            if (q2 === "C") { scores.raceRoad += 6; scores.hardTail += 5; scores.crossBike += 4; scores.endurRoad += 4; scores.gravel += 2; }
+            if (q2 === "D") { scores.cityCycle += 8; scores.crossBike += 3; scores.streetMtb += 2; scores.gravel += 1; }
 
-            // 並び替え後のvalue基準で整合性をキープ
-            if (q3 === "A") { scores.fullSus += 10; scores.hardTail -= 5; scores.raceRoad -= 5; }
-            if (q3 === "D") { scores.hardTail += 6; scores.dirtJump += 3; scores.fullSus -= 2; }
-            if (q3 === "B") { scores.raceRoad += 5; scores.endurRoad += 5; scores.gravel += 5; scores.fullSus -= 5; scores.hardTail -= 5; }
-            if (q3 === "C") { scores.crossBike += 4; scores.streetMtb += 4; scores.raceRoad += 2; scores.fullSus -= 5; scores.hardTail -= 3; }
+            // Q3を「ハードウェアの絶対条件（特大加点）」として処理し、矛盾を排除
+            if (q3 === "A") { scores.fullSus += 30; }
+            if (q3 === "D") { scores.hardTail += 30; scores.dirtJump += 30; }
+            if (q3 === "B") { scores.raceRoad += 30; scores.endurRoad += 30; scores.gravel += 30; }
+            if (q3 === "C") { scores.bmx += 30; scores.streetMtb += 30; scores.crossBike += 30; scores.cityCycle += 30; }
 
             const sortedTypes = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
             const rank1 = sortedTypes[0];
@@ -287,7 +288,7 @@
                 </div>
             `;
 
-            const sizeGuide = "【息子へのサイズアドバイス】<br>身長175cmなら、大人用の「Mサイズ」や「Lサイズ」がベストマッチ！マウンテンバイクなら大迫力の29インチホイール、ロードやクロスなら「700C（スポーツ車基準サイズ）」、シティサイクルなら「27インチ」という、最もグングン進む本格サイズを完全に乗りこなせる立派な体格だよ！";
+            const sizeGuide = "【由悟へのサイズアドバイス】<br>身長175cmなら、大人用の「Mサイズ」や「Lサイズ」がベストマッチ！マウンテンバイクなら大迫力の29インチホイール、ロードやクロスなら「700C（スポーツ車基準サイズ）」、シティサイクルなら「27インチ」という、最もグングン進む本格サイズを完全に乗りこなせる立派な体格だよ！";
             document.getElementById('size-advice').innerHTML = sizeGuide;
 
             document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
