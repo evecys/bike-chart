@@ -207,13 +207,12 @@
 
             document.getElementById('step2').classList.remove('active');
 
-            // ルートに応じてQ3を動的に出し分け
             if (q1 === "A" && q2 === "D") {
-                document.getElementById('step3-X').classList.add('active'); // 街乗り×実用
+                document.getElementById('step3-X').classList.add('active'); 
             } else if (q1 === "B") {
-                document.getElementById('step3-Y').classList.add('active'); // オフロード特化
+                document.getElementById('step3-Y').classList.add('active'); 
             } else {
-                document.getElementById('step3-Z').classList.add('active'); // スピード・トリック共通
+                document.getElementById('step3-Z').classList.add('active'); 
             }
         }
 
@@ -230,17 +229,16 @@
                 bmx: 0, cityCycle: 0
             };
 
-            // ベース配点
             if (q1 === "A") { scores.bmx += 5; scores.streetMtb += 4; scores.crossBike += 3; scores.cityCycle += 3; }
             if (q1 === "B") { scores.fullSus += 5; scores.hardTail += 5; scores.dirtJump += 4; scores.gravel += 3; }
             if (q1 === "C") { scores.raceRoad += 5; scores.endurRoad += 5; scores.crossBike += 4; scores.gravel += 2; }
 
+            // 【重要】Q2(B)選曲時のバグを完全修正。hardTailへ「+5」の加点を追加
             if (q2 === "A") { scores.bmx += 5; scores.dirtJump += 5; scores.streetMtb += 3; }
-            if (q2 === "B") { scores.fullSus += 6; scores.streetMtb += 3; scores.gravel += 3; scores.endurRoad += 2; }
+            if (q2 === "B") { scores.fullSus += 6; scores.hardTail += 5; scores.streetMtb += 2; scores.gravel += 1; }
             if (q2 === "C") { scores.raceRoad += 5; scores.hardTail += 5; scores.crossBike += 5; scores.endurRoad += 3; }
             if (q2 === "D") { scores.cityCycle += 10; scores.crossBike += 4; }
 
-            // ルートごとの特大加点（矛盾の完全シャットアウト）
             if (route === 'X') {
                 if (q3Val === 'X_A') { scores.cityCycle += 20; scores.crossBike += 5; }
                 if (q3Val === 'X_B') { scores.crossBike += 20; scores.cityCycle += 5; }
