@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>息子専用！ピッタリ自転車診断</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f6fa;
+            color: #333;
+            max-width: 680px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #2980b9;
+            padding-bottom: 12px;
+            font-size: 26px;
+        }
+        .step {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .step.active {
+            display: block;
+        }
+        .btn-container {
+            text-align: right;
+            margin-top: 25px;
+        }
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #1c5980;
+        }
+        .radio-group label {
+            display: block;
+            font-weight: normal;
+            background: #f8f9fa;
+            padding: 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .radio-group label:hover {
+            background: #edf4f9;
+            border-color: #2980b9;
+        }
+        .radio-group input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        .result-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .rank-1 { border-left: 6px solid #e74c3c; }
+        .rank-2 { border-left: 6px solid #f1c40f; margin-top: 25px; }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .badge-1 { background-color: #e74c3c; }
+        .badge-2 { background-color: #f1c40f; color: #333; }
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .price-tag {
+            background: #fdf2e9;
+            color: #d35400;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .size-box {
+            background: #eaeded;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 25px;
+            font-size: 14px;
+            border: 1px solid #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚲 息子専用！ピッタリ自転車診断 🚲</h1>
+
+    <!-- Q1 -->
+    <div id="step1" class="step active">
+        <h2>Q1: 新しい自転車を手に入れたら、まずどこに飛び出したい？</h2>
+        <div class="radio-group">
+            <label><input type="radio" name="q1" value="A"> 友達の家や近くの公園、いつもの街をカッコよく走り回る！</label>
+            <label><input type="radio" name="q1" value="B"> 土の林道や本格的な山のオフロードコースに挑む！</label>
+            <label><input type="radio" name="q1" value="C"> どこまでも続くきれいなアスファルトの道を、限界まで遠くへ遠征する！</label>
+        </div>
+        <div class="btn-container">
+            <button onclick="nextStep(2)">次へすすむ →</button>
+        </div>
+    </div>
+
+    <!-- Q2 -->
+    <div id="step2" class="step">
+        <h2>Q2: 自分にとって「一番サイコーな自転車の走らせ方」は？</h2>
+        <div class="radio-group">
+            <label><input type="radio" name="q2" value="A"> 前輪を上げたり、段差を飛び越えたり、技（トリック）に挑戦する！</label>
+            <label><input type="radio" name="q2" value="B"> 荒れたデコボコ道や激しいくだり坂を、ショックなしで安全に・無敵の乗り心地で突破する！</label>
+            <label><input type="radio" name="q2" value="C"> 坂道を軽々と立ち漕ぎで登ったり、ペダルを踏んだ分だけダイレクトに加速する軽快さ！</label>
+            <label><input type="radio" name="q2" value="D"> 荷物も積めて、泥はねも気にせず、とにかく毎日ノートラブルで便利に乗れること！</label>
+        </div>
+        <div class="btn-container">
+            <button onclick="nextStep(3)">次へすすむ →</button>
+        </div>
+    </div>
+
+    <!-- Q3（指定の順序に並び替え：A -> D -> B -> C） -->
+    <div id="step3" class="step">
+        <h2>Q3: ぶっちゃけ、見た目や機材の「こだわり」はどこ？</h2>
+        <div class="radio-group">
+            <label><input type="radio" name="q3" value="A"> 前にも後ろにもゴツいスプリング（サスペンション）がある、最高峰のメカっぽさ！</label>
+            <label><input type="radio" name="q3" value="D"> 前だけにサスペンションがある、あのカチッとしたマウンテンバイクの王道スタイル！</label>
+            <label><input type="radio" name="q3" value="B"> レーサーが乗るような、あの羊の角みたいな「ドロップハンドル」が渋くて憧れる！</label>
+            <label><input type="radio" name="q3" value="C"> ハンドルはまっすぐ。余計なクッションは無くして、車体が軽くてシンプルなのがイイ！</label>
+        </div>
+        <div class="btn-container">
+            <button onclick="calculateResult()">運命の診断結果を見る！ 🎉</button>
+        </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result-step" class="step">
+        <h2>息子への総合おすすめ提案</h2>
+        <div id="result-container"></div>
+        <div class="size-box" id="size-advice"></div>
+        <div class="btn-container">
+            <button onclick="restart()">もう一度診断する</button>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(stepNum) {
+            const currentStep = stepNum - 1;
+            if (!document.querySelector(`input[name="q${currentStep}"]:checked`)) { 
+                alert('どれか1つ、直感で選んでみてね！'); 
+                return; 
+            }
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
+        }
+
+        function calculateResult() {
+            if (!document.querySelector('input[name="q3"]:checked')) { alert('最後の一つも選んでね！'); return; }
+
+            const q1 = document.querySelector('input[name="q1"]:checked').value;
+            const q2 = document.querySelector('input[name="q2"]:checked').value;
+            const q3 = document.querySelector('input[name="q3"]:checked').value;
+
+            const scores = {
+                fullSus: 0, hardTail: 0, dirtJump: 0, streetMtb: 0,
+                gravel: 0, raceRoad: 0, endurRoad: 0, crossBike: 0,
+                bmx: 0, cityCycle: 0
+            };
+
+            if (q1 === "A") { scores.bmx += 4; scores.streetMtb += 3; scores.crossBike += 3; scores.cityCycle += 2; }
+            if (q1 === "B") { scores.fullSus += 4; scores.hardTail += 4; scores.dirtJump += 3; scores.gravel += 2; }
+            if (q1 === "C") { scores.raceRoad += 4; scores.endurRoad += 4; scores.gravel += 3; scores.crossBike += 2; }
+
+            if (q2 === "A") { scores.bmx += 5; scores.dirtJump += 5; }
+            if (q2 === "B") { scores.fullSus += 6; scores.streetMtb += 2; }
+            if (q2 === "C") { scores.hardTail += 4; scores.raceRoad += 4; scores.endurRoad += 3; scores.crossBike += 3; scores.gravel += 3; }
+            if (q2 === "D") { scores.cityCycle += 8; }
+
+            // 並び替え後のvalue基準で整合性をキープ
+            if (q3 === "A") { scores.fullSus += 10; scores.hardTail -= 5; scores.raceRoad -= 5; }
+            if (q3 === "D") { scores.hardTail += 6; scores.dirtJump += 3; scores.fullSus -= 2; }
+            if (q3 === "B") { scores.raceRoad += 5; scores.endurRoad += 5; scores.gravel += 5; scores.fullSus -= 5; scores.hardTail -= 5; }
+            if (q3 === "C") { scores.crossBike += 4; scores.streetMtb += 4; scores.raceRoad += 2; scores.fullSus -= 5; scores.hardTail -= 3; }
+
+            const sortedTypes = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+            const rank1 = sortedTypes[0];
+            const rank2 = sortedTypes[1];
+
+            const database = {
+                fullSus: {
+                    title: "フルサスペンション・トレイルバイク",
+                    price: "目安：約 25万円〜60万円以上（本格機材のため高価）",
+                    desc: "前輪にも後輪にも高性能なサスペンションがついた無敵のマシン！岩場も激しい段差も、まるでじゅうたんの上を走っているかのように衝撃をすべて吸収してくれる最高峰の機材だよ。抜群に安全でラクだけど、パーツが多いため価格は高めでメンテナンスも重要。"
+                },
+                hardTail: {
+                    title: "本格クロスカントリー（XC）MTB（ハードテイル）",
+                    price: "目安：約 8万円〜20万円前後",
+                    desc: "前だけにサスペンションがある、マウンテンバイクの王道スタイル！後ろ側がカチッと固定されているから漕いだ力が逃げず、坂道をグイグイ登る軽快さが自慢。軽さとタフさのバランスが良く、長く愛せるスポーツ車だよ。"
+                },
+                dirtJump: {
+                    title: "ダートジャンプ（DJ）マウンテンバイク",
+                    price: "目安：約 12万円〜25万円前後",
+                    desc: "土のジャンプ台を飛び越えたり、空中でのアクションを極めるために作られた超頑丈なMTB。サドルが極端に低く設計されていて、壊れにくさとストリート感溢れるカッコよさはダントツ！"
+                },
+                streetMtb: {
+                    title: "ストリート・リジッドMTB（サスなし太タイヤ）",
+                    price: "目安：約 7万円〜12万円前後",
+                    desc: "あえてサスペンションを排除して、そのぶん超極太のストリートタイヤを履かせたシンプルなスタイル。街中の段差をノーダメージでカッコよく、キビキビと走り抜けられる扱いやすさが魅力。"
+                },
+                gravel: {
+                    title: "グラベルロードバイク",
+                    price: "目安：約 13万円〜30万円前後",
+                    desc: "ロードバイクの「スピード感」と、マウンテンバイクの「悪路走破性」が合体した万能マシン。ドロップハンドルで風を切りながら、砂利道や草むらもガンガン進める大冒険用の自転車だよ。"
+                },
+                raceRoad: {
+                    title: "ピュア・レーシングロードバイク",
+                    price: "目安：約 12万円〜40万円以上",
+                    desc: "軽さと空気抵抗の少なさを限界まで突き詰めた、舗装路のスピードキング。極細のタイヤとドロップハンドルで、ペダルを踏み込んだ瞬間にロケットみたいに加速する快感を味わえるよ。"
+                },
+                endurRoad: {
+                    title: "エンデュランス・ロードバイク",
+                    price: "目安：約 12万円〜30万円前後",
+                    desc: "ロードバイクのスピードはそのままに、少しラクな姿勢で長距離を走れる旅仕様。疲れにくくパンクにも強いタイヤで、遠くの街までサイクリングするのに最高の相棒だよ。"
+                },
+                crossBike: {
+                    title: "クロスバイク（スポーツ系街乗り）",
+                    price: "目安：約 6万円〜11万円前後",
+                    desc: "まっすぐなハンドルで視界が広く、最初から誰でも100%乗りこなせるスポーツバイクの決定版。ロードバイク譲りの軽い走りで、普段の移動から週末のサイクリングまで一番ハズレのない万能選手！"
+                },
+                bmx: {
+                    title: "本格ストリートBMX",
+                    price: "目安：約 5万円〜10万円前後",
+                    desc: "20インチの小さな車体に、絶対に壊れない超頑丈なフレーム。街の壁や公園の段差を遊び場に変えて、ジャンプや回転などの技をバシバシ決めるストリートカルチャーの王様だ！"
+                },
+                cityCycle: {
+                    title: "王道！シティサイクル（軽快車）",
+                    price: "目安：約 3万円〜6万円前後",
+                    desc: "大きなカゴ、泥よけ、頑丈なスタンドが最初からフル装備された、実用性最強の自転車。カバンをカゴに放り込んで、いつでもメンテナンスフリーで街をスイスイ走れる安心感が魅力だよ。"
+                }
+            };
+
+            const container = document.getElementById('result-container');
+            container.innerHTML = `
+                <div class="result-card rank-1">
+                    <span class="badge badge-1">第1候補：あなたに一番ピッタリ！</span>
+                    <div class="card-title">${database[rank1].title}</div>
+                    <p>${database[rank1].desc}</p>
+                    <div class="price-tag">${database[rank1].price}</div>
+                </div>
+                
+                <div class="result-card rank-2">
+                    <span class="badge badge-2">第2候補：こちらもおすすめ！</span>
+                    <div class="card-title">${database[rank2].title}</div>
+                    <p>${database[rank2].desc}</p>
+                    <div class="price-tag">${database[rank2].price}</div>
+                </div>
+            `;
+
+            const sizeGuide = "【息子へのサイズアドバイス】<br>身長175cmなら、大人用の「Mサイズ」や「Lサイズ」がベストマッチ！マウンテンバイクなら大迫力の29インチホイール、ロードやクロスなら「700C（スポーツ車基準サイズ）」、シティサイクルなら「27インチ」という、最もグングン進む本格サイズを完全に乗りこなせる立派な体格だよ！";
+            document.getElementById('size-advice').innerHTML = sizeGuide;
+
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('result-step').classList.add('active');
+        }
+
+        function restart() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+        }
+    </script>
+</body>
+</html>
