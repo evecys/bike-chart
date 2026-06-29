@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>息子専用！ピッタリ自転車診断</title>
+    <title>由悟専用！ピッタリ自転車診断</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -121,9 +121,8 @@
 </head>
 <body>
 
-    <h1>🚲 息子専用！ピッタリ自転車診断 🚲</h1>
+    <h1>🚲 由悟専用！ピッタリ自転車診断 🚲</h1>
 
-    <!-- Q1 -->
     <div id="step1" class="step active">
         <h2>Q1: 新しい自転車を手に入れたら、まずどこに飛び出したい？</h2>
         <div class="radio-group">
@@ -132,41 +131,61 @@
             <label><input type="radio" name="q1" value="C"> どこまでも続くきれいなアスファルトの道を、限界まで遠くへ遠征する！</label>
         </div>
         <div class="btn-container">
-            <button onclick="nextStep(2)">次へすすむ →</button>
+            <button onclick="goToQ2()">次へすすむ →</button>
         </div>
     </div>
 
-    <!-- Q2 -->
     <div id="step2" class="step">
         <h2>Q2: 自分にとって「一番サイコーな自転車の走らせ方」は？</h2>
         <div class="radio-group">
             <label><input type="radio" name="q2" value="A"> 前輪を上げたり、段差を飛び越えたり、技（トリック）に挑戦する！</label>
             <label><input type="radio" name="q2" value="B"> 荒れたデコボコ道や激しいくだり坂を、ショックなしで安全に・無敵の乗り心地で突破する！</label>
             <label><input type="radio" name="q2" value="C"> 坂道を軽々と立ち漕ぎで登ったり、ペダルを踏んだ分だけダイレクトに加速する軽快さ！</label>
-            <label><input type="radio" name="q2" value="D"> 荷物も積めて、泥はねも気にせず、とにかく毎日ノートラブルで便利に乗れること！</label>
+            <label><input type="radio" name="q2" value="D"> カゴに荷物を入れたり、泥よけ付きで普段の移動を一番快適にこなしたい！</label>
         </div>
         <div class="btn-container">
-            <button onclick="nextStep(3)">次へすすむ →</button>
+            <button onclick="goToQ3()">次へすすむ →</button>
         </div>
     </div>
 
-    <!-- Q3 -->
-    <div id="step3" class="step">
-        <h2>Q3: ぶっちゃけ、見た目や機材の「こだわり」はどこ？</h2>
+    <div id="step3-X" class="step">
+        <h2>Q3: 自転車の扱いや、性格的にはどっちのタイプ？</h2>
         <div class="radio-group">
-            <label><input type="radio" name="q3" value="A"> 前にも後ろにもゴツいスプリング（サスペンション）がある、最高峰のメカっぽさ！</label>
-            <label><input type="radio" name="q3" value="D"> 前だけにサスペンションがある、あのカチッとしたマウンテンバイクの王道スタイル！</label>
-            <label><input type="radio" name="q3" value="B"> レーサーが乗るような、あの羊の角みたいな「ドロップハンドル」が渋くて憧れる！</label>
-            <label><input type="radio" name="q3" value="C"> ハンドルはまっすぐ。余計なクッションは無くして、車体が軽くてシンプルなのがイイ！</label>
+            <label><input type="radio" name="q3X" value="X_A"> 正直、飽き性かもしれないから、最初はコスパが良くて気軽に使えるものがいい！</label>
+            <label><input type="radio" name="q3X" value="X_B"> モノは大事に長く使うタイプ！カゴや泥除けがあっても、ちょっとスポーティでカッコいいやつがいい！</label>
         </div>
         <div class="btn-container">
-            <button onclick="calculateResult()">運命の診断結果を見る！ 🎉</button>
+            <button onclick="calculateResult('X')">運命の診断結果を見る！ 🎉</button>
         </div>
     </div>
 
-    <!-- RESULT -->
+    <div id="step3-Y" class="step">
+        <h2>Q3: 見た目のスタイルや、走るときの好みのパーツは？</h2>
+        <div class="radio-group">
+            <label><input type="radio" name="q3Y" value="Y_A"> 前にも後ろにもゴツいスプリング（サスペンション）がある、最高峰のメカっぽさがいい！</label>
+            <label><input type="radio" name="q3Y" value="Y_B"> 前だけにサスペンションがある、あのカチッとしたマウンテンバイクの王道スタイル！</label>
+            <label><input type="radio" name="q3Y" value="Y_C"> レーサーみたいな「ドロップハンドル」だけど、太いブロックタイヤで土の上を冒険したい！</label>
+            <label><input type="radio" name="q3Y" value="Y_D"> ジャンプや技をやりたいから、サドルが低くてとにかく頑丈な車体がいい！</label>
+        </div>
+        <div class="btn-container">
+            <button onclick="calculateResult('Y')">運命の診断結果を見る！ 🎉</button>
+        </div>
+    </div>
+
+    <div id="step3-Z" class="step">
+        <h2>Q3: 乗るときの「姿勢」や「ハンドルの形」の好みは？</h2>
+        <div class="radio-group">
+            <label><input type="radio" name="q3Z" value="Z_A"> レーサーっぽくて超カッコいい「ドロップハンドル」で、前傾姿勢で風を切りたい！</label>
+            <label><input type="radio" name="q3Z" value="Z_B"> ドロップハンドルだけど、少し姿勢がラクで長距離を快適に旅できる仕様がいい！</label>
+            <label><input type="radio" name="q3Z" value="Z_C"> 扱いやすくて視界も広い「まっすぐな平らなハンドル」で、気軽に乗るのがいい！</label>
+        </div>
+        <div class="btn-container">
+            <button onclick="calculateResult('Z')">運命の診断結果を見る！ 🎉</button>
+        </div>
+    </div>
+
     <div id="result-step" class="step">
-        <h2>息子への総合おすすめ提案</h2>
+        <h2>由悟への総合おすすめ提案</h2>
         <div id="result-container"></div>
         <div class="size-box" id="size-advice"></div>
         <div class="btn-container">
@@ -175,22 +194,35 @@
     </div>
 
     <script>
-        function nextStep(stepNum) {
-            const currentStep = stepNum - 1;
-            if (!document.querySelector(`input[name="q${currentStep}"]:checked`)) { 
-                alert('どれか1つ、直感で選んでみてね！'); 
-                return; 
-            }
-            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-            document.getElementById('step' + stepNum).classList.add('active');
+        function goToQ2() {
+            if (!document.querySelector('input[name="q1"]:checked')) { alert('どれか1つ選んでね！'); return; }
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
         }
 
-        function calculateResult() {
-            if (!document.querySelector('input[name="q3"]:checked')) { alert('最後の一つも選んでね！'); return; }
+        function goToQ3() {
+            if (!document.querySelector('input[name="q2"]:checked')) { alert('どれか1つ選んでね！'); return; }
+            const q1 = document.querySelector('input[name="q1"]:checked').value;
+            const q2 = document.querySelector('input[name="q2"]:checked').value;
+
+            document.getElementById('step2').classList.remove('active');
+
+            // ルートに応じてQ3を動的に出し分け
+            if (q1 === "A" && q2 === "D") {
+                document.getElementById('step3-X').classList.add('active'); // 街乗り×実用
+            } else if (q1 === "B") {
+                document.getElementById('step3-Y').classList.add('active'); // オフロード特化
+            } else {
+                document.getElementById('step3-Z').classList.add('active'); // スピード・トリック共通
+            }
+        }
+
+        function calculateResult(route) {
+            if (!document.querySelector(`input[name="q3${route}"]:checked`)) { alert('最後の一つも選んでね！'); return; }
 
             const q1 = document.querySelector('input[name="q1"]:checked').value;
             const q2 = document.querySelector('input[name="q2"]:checked').value;
-            const q3 = document.querySelector('input[name="q3"]:checked').value;
+            const q3Val = document.querySelector(`input[name="q3${route}"]:checked`).value;
 
             const scores = {
                 fullSus: 0, hardTail: 0, dirtJump: 0, streetMtb: 0,
@@ -198,22 +230,30 @@
                 bmx: 0, cityCycle: 0
             };
 
-            // Q1の配点（ベースの場所適性）
-            if (q1 === "A") { scores.bmx += 7; scores.streetMtb += 6; scores.crossBike += 5; scores.dirtJump += 4; scores.cityCycle += 4; }
-            if (q1 === "B") { scores.fullSus += 8; scores.hardTail += 7; scores.dirtJump += 6; scores.gravel += 4; }
-            if (q1 === "C") { scores.raceRoad += 8; scores.endurRoad += 7; scores.crossBike += 5; scores.gravel += 4; }
+            // ベース配点
+            if (q1 === "A") { scores.bmx += 5; scores.streetMtb += 4; scores.crossBike += 3; scores.cityCycle += 3; }
+            if (q1 === "B") { scores.fullSus += 5; scores.hardTail += 5; scores.dirtJump += 4; scores.gravel += 3; }
+            if (q1 === "C") { scores.raceRoad += 5; scores.endurRoad += 5; scores.crossBike += 4; scores.gravel += 2; }
 
-            // Q2の配点（本人の一番やりたい熱量）
-            if (q2 === "A") { scores.bmx += 10; scores.dirtJump += 9; scores.streetMtb += 7; } // トリック熱を最重視
-            if (q2 === "B") { scores.fullSus += 10; scores.streetMtb += 5; scores.gravel += 4; scores.endurRoad += 3; scores.cityCycle += 3; }
-            if (q2 === "C") { scores.raceRoad += 9; scores.hardTail += 8; scores.crossBike += 7; scores.endurRoad += 5; }
-            if (q2 === "D") { scores.cityCycle += 10; scores.crossBike += 5; }
+            if (q2 === "A") { scores.bmx += 5; scores.dirtJump += 5; scores.streetMtb += 3; }
+            if (q2 === "B") { scores.fullSus += 6; scores.streetMtb += 3; scores.gravel += 3; scores.endurRoad += 2; }
+            if (q2 === "C") { scores.raceRoad += 5; scores.hardTail += 5; scores.crossBike += 5; scores.endurRoad += 3; }
+            if (q2 === "D") { scores.cityCycle += 10; scores.crossBike += 4; }
 
-            // Q3の配点（ハンドルだけの決定を廃止。スタイルの方向性を微調整する加点に変更）
-            if (q3 === "A") { scores.fullSus += 7; scores.hardTail -= 5; }
-            if (q3 === "D") { scores.hardTail += 6; scores.dirtJump += 6; scores.fullSus += 2; }
-            if (q3 === "B") { scores.raceRoad += 7; scores.endurRoad += 7; scores.gravel += 6; }
-            if (q3 === "C") { scores.crossBike += 5; scores.bmx += 4; scores.streetMtb += 5; scores.cityCycle += 4; scores.raceRoad -= 2; }
+            // ルートごとの特大加点（矛盾の完全シャットアウト）
+            if (route === 'X') {
+                if (q3Val === 'X_A') { scores.cityCycle += 20; scores.crossBike += 5; }
+                if (q3Val === 'X_B') { scores.crossBike += 20; scores.cityCycle += 5; }
+            } else if (route === 'Y') {
+                if (q3Val === 'Y_A') { scores.fullSus += 30; }
+                if (q3Val === 'Y_B') { scores.hardTail += 30; }
+                if (q3Val === 'Y_C') { scores.gravel += 30; }
+                if (q3Val === 'Y_D') { scores.dirtJump += 30; scores.bmx += 10; }
+            } else if (route === 'Z') {
+                if (q3Val === 'Z_A') { scores.raceRoad += 30; scores.gravel += 15; }
+                if (q3Val === 'Z_B') { scores.endurRoad += 30; scores.gravel += 15; }
+                if (q3Val === 'Z_C') { scores.crossBike += 30; scores.streetMtb += 15; scores.bmx += 15; }
+            }
 
             const sortedTypes = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
             const rank1 = sortedTypes[0];
@@ -289,7 +329,7 @@
                 </div>
             `;
 
-            const sizeGuide = "【息子へのサイズアドバイス】<br>身長175cmなら、大人用の「Mサイズ」や「Lサイズ」がベストマッチ！マウンテンバイクなら大迫力の29インチホイール、ロードやクロスなら「700C（スポーツ車基準サイズ）」、シティサイクルなら「27インチ」という、最もグングン進む本格サイズを完全に乗りこなせる立派な体格だよ！";
+            const sizeGuide = "【由悟へのサイズアドバイス】<br>身長175cmなら、大人用の「Mサイズ」や「Lサイズ」がベストマッチ！マウンテンバイクなら大迫力の29インチホイール、ロードやクロスなら「700C（スポーツ車基準サイズ）」、シティサイクルなら「27インチ」という、最もグングン進む本格サイズを完全に乗りこなせる立派な体格だよ！";
             document.getElementById('size-advice').innerHTML = sizeGuide;
 
             document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
